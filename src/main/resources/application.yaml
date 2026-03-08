@@ -7,8 +7,8 @@ spring:
   # ─── Datasource ───────────────────────────────────────────
   datasource:
     url: jdbc:postgresql://localhost:5432/concursos_db
-    username: admin
-    password: admin123
+    username: ${USER}
+    password: ${DBPASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       pool-name: ConcursosPool
