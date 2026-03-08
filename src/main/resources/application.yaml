@@ -1,0 +1,58 @@
+# src/main/resources/application.yml
+
+spring:
+  application:
+    name: app
+
+  # ─── Datasource ───────────────────────────────────────────
+  datasource:
+    url: jdbc:postgresql://localhost:5432/concursos_db
+    username: admin
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: ConcursosPool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+      max-lifetime: 1800000
+
+  # ─── Spring Data JDBC ─────────────────────────────────────
+  data:
+    jdbc:
+      dialect: postgresql
+
+  # ─── Flyway ───────────────────────────────────────────────
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+  # ─── Vaadin ───────────────────────────────────────────────
+  vaadin:
+    launch-browser: true
+    allowed-packages:
+      - estudo.app
+
+# ─── Servidor ─────────────────────────────────────────────
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+
+# ─── Logging ──────────────────────────────────────────────
+logging:
+  level:
+    root: WARN
+    com.example.concursos: DEBUG
+    org.springframework.jdbc.core: DEBUG
+    org.springframework.transaction: DEBUG
+    com.zaxxer.hikari: INFO
+    org.flywaydb: INFO
+  pattern:
+    console: "%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
